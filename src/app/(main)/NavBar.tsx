@@ -36,11 +36,11 @@ export function NavBar() {
       children: [
         ...(teamId
           ? [
-              {
-                label: formatMessage(labels.team),
-                url: renderTeamUrl('/settings/team'),
-              },
-            ]
+            {
+              label: formatMessage(labels.team),
+              url: renderTeamUrl('/settings/team'),
+            },
+          ]
           : []),
         {
           label: formatMessage(labels.websites),
@@ -48,21 +48,21 @@ export function NavBar() {
         },
         ...(!teamId
           ? [
-              {
-                label: formatMessage(labels.teams),
-                url: renderTeamUrl('/settings/teams'),
-              },
-              {
-                label: formatMessage(labels.users),
-                url: '/settings/users',
-              },
-            ]
+            {
+              label: formatMessage(labels.teams),
+              url: renderTeamUrl('/settings/teams'),
+            },
+            {
+              label: formatMessage(labels.users),
+              url: '/settings/users',
+            },
+          ]
           : [
-              {
-                label: formatMessage(labels.members),
-                url: renderTeamUrl('/settings/members'),
-              },
-            ]),
+            {
+              label: formatMessage(labels.members),
+              url: renderTeamUrl('/settings/members'),
+            },
+          ]),
       ],
     },
     {
@@ -73,42 +73,42 @@ export function NavBar() {
   ].filter(n => n);
 
   const handleTeamChange = (teamId: string) => {
-    const url = teamId ? `/teams/${teamId}` : '/';
+    const url = teamId ? `/teams/${ teamId }` : '/';
 
-    router.push(cloudMode ? `${process.env.cloudUrl}${url}` : url);
+    router.push(cloudMode ? `${ process.env.cloudUrl }${ url }` : url);
   };
 
   return (
-    <div className={styles.navbar}>
-      <div className={styles.logo}>
+    <div className={ styles.navbar }>
+      <div className={ styles.logo }>
         <Icon size="lg">
           <Icons.Logo />
         </Icon>
-        <Text>umami</Text>
+        <Text>utm.ai</Text>
       </div>
-      <div className={styles.links}>
-        {links.map(({ url, label }) => {
+      <div className={ styles.links }>
+        { links.map(({ url, label }) => {
           return (
             <Link
-              key={url}
-              href={url}
-              className={classNames({ [styles.selected]: pathname.startsWith(url) })}
-              prefetch={url !== '/settings'}
+              key={ url }
+              href={ url }
+              className={ classNames({ [ styles.selected ]: pathname.startsWith(url) }) }
+              prefetch={ url !== '/settings' }
             >
-              <Text>{label}</Text>
+              <Text>{ label }</Text>
             </Link>
           );
-        })}
+        }) }
       </div>
-      <div className={styles.actions}>
-        <TeamsButton onChange={handleTeamChange} />
+      <div className={ styles.actions }>
+        <TeamsButton onChange={ handleTeamChange } />
         <ThemeButton />
         <LanguageButton />
         <ProfileButton />
       </div>
-      <div className={styles.mobile}>
-        <TeamsButton onChange={handleTeamChange} showText={false} />
-        <HamburgerButton menuItems={menuItems} />
+      <div className={ styles.mobile }>
+        <TeamsButton onChange={ handleTeamChange } showText={ false } />
+        <HamburgerButton menuItems={ menuItems } />
       </div>
     </div>
   );
